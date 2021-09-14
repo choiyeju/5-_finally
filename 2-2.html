@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <title>Summer</title>
+    <style>
+        /* 초기화 */
+        * {
+            margin: 0; padding: 0; border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            font-family: 'Segoe UI', '맑은 고딕', 'Malgun Gothic', Gothic, sans-serif;
+        }
+        a {
+            line-height: 0;
+            text-decoration: none;
+            background-color: transparent;
+            color: white;
+            outline: none;
+        }
+        a:hover, a:active {
+            text-decoration: none;
+            color: white;}
+    </style>
+
+    <script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' />
+    <link rel="stylesheet" href="toggle_menu_2.css"/>
+
+    <style>
+        /* 모달 */
+        .blocker {
+            z-index: 101;
+        }
+        .modal {
+            max-width: 800px;
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 래퍼 */
+        #wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background-image: url('Summer_main.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-color: #0097fc;
+        }
+        .overlap-img {
+            position: absolute;
+            width: 100%;
+            min-height: 100vh;
+            background-image: url('Summer_main.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-color: #FFA7A7;
+            opacity: 0;
+            pointer-events: none;
+        }
+        input[type=checkbox]:checked ~ .overlap-img {
+            animation-name: fadeIn;
+            animation-duration: 300ms;
+            animation-fill-mode: forwards;
+        }
+
+        /* 헤더 */
+        #top {
+            background: #25363D00;
+            position: fixed;
+            left: 0; top: 0; right: 0;
+            height: 60px;
+            z-index: 100;
+        }
+
+        .logo {
+            position: absolute;
+            width: 100px; height: 100px;
+            margin: 0 0 0 -50px;
+            left: 50%;
+            transform: translateY(0);
+            transition: transform 300ms ease-out;
+        }
+        input[type=checkbox]:checked ~ .logo {
+            transform: translateY(-100px);
+        }
+        .cart {
+            position: absolute;
+            width: 24px; height: 24px;
+            margin: 18px;
+            right: 0;
+        }
+
+        /* 섹션 1 */
+        section {
+            width: min(90%, 1080px);
+            margin: 0 auto;
+        }
+
+        #sc1 {
+            height: 100vh;
+            text-align: center;
+            z-index: 1;
+        }
+        .page-title {
+            width: 400px;
+            position: fixed;
+            left: 50%; top: 50%;
+            margin: -120px 0 0 -200px;
+            font-size: 96px;
+            font-weight: 500;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            color: #0097fc;
+            text-shadow: 0px 0px 13px white;
+            text-shadow: 0px 0px 13px white;
+            cursor: pointer;
+        }
+        .page-subtitle {
+            width: 400px;
+            position: fixed;
+            left: 50%; top: 50%;
+            margin: 30px 0 0 -200px;
+            font-size: 18px;
+            opacity: 0;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+            animation-delay: 1s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+            cursor: pointer;
+            color: #0097fc;
+            text-shadow: 0px 0px 20px white;
+            text-shadow: 0px 0px 20px white;
+        }
+
+        /* 섹션 2 */
+        #sc2 {
+            overflow: hidden;
+            z-index: 10;
+        }
+        .track-box-anchor {
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            margin-bottom: 120px;
+            padding: 30px;
+            background-color: #0097fc;
+            color: snow;
+            border-radius: 8px;
+        }
+        .track-box {
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            margin-bottom: 120px;
+            padding: 30px;
+            background-color: #0097fc;
+            color: snow;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .track-box img {
+            float: right;
+            width: 300px;
+            padding: 0 0 0 15px;
+        }
+        .track-box h1 {
+            font-size: 30pt;
+            font-weight: 500;
+            line-height: 34pt;
+        }
+        .track-box h2 {
+            margin-top: 10px;
+            font-size: 18pt;
+            opacity: 0.6;
+        }
+        .track-box p {
+            margin-top: 20px;
+            font-size: 14pt;
+            opacity: 0.8;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .track-box > a {
+            position: absolute;
+            width: 150px;
+            height: 30px;
+            bottom: 15px;
+            color: snow;
+            opacity: 1;
+        }
+
+        .modal-cover img {
+            float: right;
+            width: 180px; height: 180px;
+            padding: 0 0 0 15px;
+        }
+        .modal-info > h1 {
+            font-size: 30pt;
+            font-weight: 500;
+            line-height: 34pt;
+        }
+        .modal-info > h2 {
+            margin-top: 10px;
+            font-size: 18pt;
+            opacity: 0.6;
+        }
+        .modal-info > p {
+            margin-top: 20px;
+            font-size: 14pt;
+            opacity: 0.8;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* 체크박스
+        .modal-openyt-container {
+            display: block;
+            position: relative;
+            cursor: pointer;
+            margin: 10px 0;
+            font-size: 20px;
+            user-select: none;
+        }
+        .modal-openyt-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .modal-openyt-container input:checked ~ .modal-yt {
+            display: auto;
+        }
+        */
+        /*
+        .modal-yt {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+            display: none;
+        }
+        */
+        .modal-yt iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 스마트폰 */
+        @media screen and (max-width: 767px) {
+            section {
+                width: auto;
+                margin: 0 auto;
+            }
+
+            .track-box > img {
+                float: right;
+                width: 40%;
+                padding: 0 0 0 15px;
+            }
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input:checkbox[name = 'season[]']").click(function () {
+                location.href = "3.html?summer=" +$('#summer_1').is(":checked") +"&summer =" + $('#summer_2').is(':checked') +"&summer =" + $('#summer_3').is(':checked') +"&summer =" +$('#summer_4').is(':checked');
+            });
+        });
+    
+    </script>
+</head>
+<body>
+
+    <div id='wrapper'>
+        <header id='header'>
+            <div id='top'>
+                <input type="checkbox" class="open-sidebar-menu" id="open-sidebar-menu">
+                <label for="open-sidebar-menu" class="sidebar-icon-toggle">
+                    <div class="spinner diagonal part-1"></div>
+                    <div class="spinner horizontal"></div>
+                    <div class="spinner diagonal part-2"></div>
+                </label>
+                <div class='overlap-img'></div>
+                <div id="sidebar-menu-bg">
+                    <ul class="sidebar-menu-inner">
+                        <li><a href='2-1.html'>Spring</a></li>
+                        <li><a href='2-2.html'>Summer</a></li>
+                        <li><a href='2-3.html'>Autumn</a></li>
+                        <li><a href='2-4.html'>Winter</a></li>
+                    </ul>
+                </div>
+                <h1 class='logo'>
+                    <a href='1.html'><img src='logo.png' style='width:100%'/></a>
+                </h1>
+                <h1 class='cart'>
+                    <a href='3.html'><img src="icons8-checkout-24.png" style='width: 100%; height: 100%'/></a>
+                </h1>
+                <nav class="nav">
+                    <ul>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section>
+
+            <div id='sc1'>
+                <h1 class='page-title'>Summer</h1>
+                <p class='page-subtitle'>
+                    Sun is shining. Weather is sweet.
+                    <br />
+                    Make you wanna move your dancing feet.
+                </p>
+            </div>
+
+            <div id='sc2'>
+                <!-- Track 1: V.A. - A Song -->
+                <div class='track-box'>
+                    
+                    <img src='2-1.png' />
+                    <h1>nuits d’été</h1>
+                    <h2>Oscar Anton & Clementine</h2>
+                    <p>이서영님의 여름 추천곡</p>
+                    <a href='#track-modal-1' rel='modal:open'>▶ More Info</a>
+                </div>
+                <div id='track-modal-1' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='2-1.png'></div>
+                        <div class="modal-info">
+                            <h1>nuits d’été</h1>
+                            <h2>Oscar Anton & Clementine</h2>
+                            <p>이서영님의 여름 추천곡</p>
+                            <br>
+                            <!-- 아래 Open YouTube 버튼은 기능 구현 미완. 실패시 지우기 -->
+                            <label class='modal-openyt-container'>
+                                <h1>▼ Listen to Music</h1>
+                                <!--1. 유튜브 링크일 때 <iframe src="https://www.youtube.com/embed/6TETq5jGBPI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+                                <!--2. 음악 파일일 때 <audio src = "choiyeju_spring.mp3" controls = "controls"></audio>-->
+                                <audio src = "2-1.mp3" controls = "controls"></audio>
+                                <br><br>
+                                <!-- TODO: Add to Cart 버튼 -->
+                                <h1>▼ Add to Cart</h1>
+                                <input type="checkbox"  id = "summer_1" name = "season[]"/>
+                                <!-- <form action = "3.html" name = frm id = "frm" method="POST">
+                                    <input type="checkbox" id = "winter_1" name = "winter_1">
+                                    <input type="submit" value="Put"/>
+                                </form> -->
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 2: V.A. - A Song -->
+                <div class='track-box'>
+                    <img src='2-2.png' />
+                    <h1>Universe</h1>
+                    <h2>official髭男dism</h2>
+                    <p>김세환님의 여름 추천곡</p>
+                    <a href='#track-modal-2' rel='modal:open'>▶ More Info</a>
+                </div>
+                <div id='track-modal-2' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='2-2.png'></div>
+                        <div class="modal-info">
+                            <h1>Universe</h1>
+                            <h2>official髭男dism</h2>
+                            <p>김세환님의 여름 추천곡</p>
+                            <br>
+                            <label class='modal-openyt-container'>
+                                <h1>▼ Listen to Music</h1>
+                                <iframe src="https://youtu.be/6lnS-8FVod4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <br><br>
+                                <h1>▼ Add to Cart</h1>
+                                <input type="checkbox"  id = "summer_2" name = "season[]"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 3: V.A. - A Song -->
+                <div class='track-box'>
+                    <img src='2-3.png' />
+                    <h1>Weigh the Anchor</h1>
+                    <h2>Harito</h2>
+                    <p>최예주님의 여름 추천곡</p>
+                    <a href='#track-modal-3' rel='modal:open'>▶ More Info</a>
+                </div>
+                <div id='track-modal-3' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='2-3.png'></div>
+                        <div class="modal-info">
+                            <h1>Weigh the Anchor</h1>
+                            <h2>Harito</h2>
+                            <p>  바닷가 파도 소리가 들립니다. 바닷물의 색은 지금껏 한번도 본적없는 에메랄드 빛 푸른 보석같습니다. 
+                                모래 위 놓여있는 발등 위로 반짝이는 물들이 올라옵니다. 
+                                고개를 들어 앞을 보자 벌써 바다 가까이 다가간 소중한 사람이 보입니다. 
+                                푸른 빛의 바닷물들은 이미 소중한 사람의 무릎까지 차올랐습니다. 
+                                여름 바다 위 강한 햇살 탓인가 그 사람의 눈동자 색 또한 이미 에메랄드 색으로 바뀌어있습니다. 
+                                햇살이 바닷물에 일렁일때마다 그 사람의 눈동자 색엔 푸른 색이 담깁니다. 
+                                우리들은 바다와 모래의 경계선 위를 달리고 있습니다.</p>
+                            <br>
+                            <label class='modal-openyt-container'>
+                                <h1>▼ Listen to Music</h1>
+                                <audio src = "2-3.mp3" controls = "controls"></audio>
+                                <br><br>
+                                <h1>▼ Add to Cart</h1>
+                                <input type="checkbox"  id = "summer_3" name = "season[]"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Track 4: V.A. - A Song -->
+                <div class='track-box'>
+                    <img src='2-4.png' />
+                    <h1>You Are My World</h1>
+                    <h2>nanobii</h2>
+                    <p>구현님의 여름 추천곡</p>
+                    <a href='#track-modal-4' rel='modal:open'>▶ More Info</a>
+                </div>
+                <div id='track-modal-4' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='2-4.png'></div>
+                        <div class="modal-info">
+                            <h1>You Are My World</h1>
+                            <h2>nanobii</h2>
+                            <p>구현님의 여름 추천곡</p>
+                            <br>
+                            <label class='modal-openyt-container'>
+                                <h1>▼ Listen to Music</h1>
+                                <iframe src="https://youtu.be/XJUKwYxAglE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <br><br>
+                                <h1>▼ Add to Cart</h1>
+                                <input type="checkbox"  id = "summer_4" name = "season[]"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id='sc3'>
+                </div>
+            </div>
+            
+        </section>
+        <footer>
+
+        </footer>
+    </div>
+</body>
+<script>
+</script>
+<!--
+Copyright
+<a href="https://icons8.com/icon/4PLJFiJTdFTW/menu">Menu icon by Icons8</a>
+<a href="https://icons8.com/icon/100324/checkout">Checkout icon by Icons8</a>
+-->
+</html>

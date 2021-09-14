@@ -1,0 +1,103 @@
+#sidebar-menu-bg {
+    width: 100%; height: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: #25363DC0;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar-menu-inner{
+    position: fixed;
+    width: 100%; height: 360px;
+    top: 50%;
+    margin: -240px 0 0 0;
+    padding:0;
+}
+.sidebar-menu-inner li{
+    list-style: none;
+    cursor: pointer;
+    padding: 20px;
+    text-align: center;
+    line-height: 72px;
+    font-size: 48px;
+    font-weight: 300;
+    color: #fffafa;
+    opacity: 0;
+}
+.sidebar-menu-inner li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+.sidebar-menu-inner li:hover{
+    background-color: #25363D20;
+    opacity: 1;
+}
+
+#top > input[type=checkbox] {
+    box-sizing: border-box;
+    display: none;
+}
+
+input[type=checkbox]:checked ~ #sidebar-menu-bg {
+    animation: fadeIn 600ms ease-in-out 0s forwards;
+}
+input[type=checkbox]:checked ~ #sidebar-menu-bg  li {
+    animation: fadeIn 600ms ease-in-out 300ms forwards;
+    pointer-events: auto;
+}
+
+.sidebar-icon-toggle {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    width: 22px; height: 22px;
+    margin: 19px;
+}
+.spinner {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: black;
+}
+.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+.diagonal.part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: left;
+}
+.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+
+input[type=checkbox]:checked ~ .sidebar-icon-toggle > .horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+input[type=checkbox]:checked ~ .sidebar-icon-toggle > .diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+input[type=checkbox]:checked ~ .sidebar-icon-toggle > .diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+}
