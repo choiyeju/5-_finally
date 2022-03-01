@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <title>Spring</title>
+    <style>
+        /* 초기화 */
+        * {
+            margin: 0; padding: 0; border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            font-family: 'Roboto', 'NanumSquareRound', sans-serif;
+        }
+        a {
+            text-decoration: none;
+            background-color: transparent;
+            color: white;
+            outline: none;
+        }
+        a:hover, a:active {
+            text-decoration: none;
+            color: white;}
+    </style>
+
+    <script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' />
+    <link rel="stylesheet" href="css/toggle_menu.css"/>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poly:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+
+    <link rel="stylesheet" href="css/season.css"/>
+    <style>
+        /* 모달 */
+        .blocker {
+            z-index: 101;
+        }
+        .modal {
+            max-width: 800px;
+        }
+        
+        /* 래퍼 */
+        #wrapper, .overlap-img {
+            background-image: url('img/bg-spring.jpg');
+            background-color: #F15F5F;
+        }
+
+        /* 헤더 */
+        #sidebar-menu-bg {
+            background-color: #250e0ea4;
+        }
+        .sidebar-menu-inner a {
+            font-family: 'Poly', serif;
+            letter-spacing: 1px;
+            color: #fffafaE0;
+        }
+        .sidebar-menu-inner li:hover{
+            background-color: #250e0e20;
+        }
+
+        /* 섹션 1 */
+        .page-title {
+            margin: -120px 0 0 -200px;
+            font-family: 'Poly', serif;
+            font-size: 96px;
+            color: #fd4213;
+        }
+        .page-subtitle {
+            margin: 30px 0 0 -200px;
+            font-family: 'Poly', serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: #fd4213;
+        }
+
+        /* 섹션 2 */
+        .track-box {
+            background-color: #fd4213cb;
+            color: snow;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id='wrapper'>
+
+        <header>
+            <input type="checkbox" class="open-sidebar-menu" id="open-sidebar-menu">
+            <label for="open-sidebar-menu" class="sidebar-icon-toggle">
+                <div class="spinner diagonal part-1"></div>
+                <div class="spinner horizontal"></div>
+                <div class="spinner diagonal part-2"></div>
+            </label>
+            <div class='overlap-img'></div>
+            <div id="sidebar-menu-bg">
+                <ul class="sidebar-menu-inner">
+                    <li><a href='season-1.html'>Spring</a></li>
+                    <li><a href='season-2.html'>Summer</a></li>
+                    <li><a href='season-3.html'>Autumn</a></li>
+                    <li><a href='season-4.html'>Winter</a></li>
+                </ul>
+            </div>
+            <h1 class='logo'>
+                <a href='index.html'><img src='img/logo-alt.png' style='width:100%'/></a>
+            </h1>
+            <h1 class='cart'>
+                <a href='cart.html'><img src="img/icons8-checkout-24.png" style='width: 100%; height: 100%'/></a>
+            </h1>
+            <nav class="nav">
+                <ul>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+
+            <div id='sc1'>
+                <h1 class='page-title'>Spring</h1>
+                <p class='page-subtitle'>
+                    Spring is when all life is alive.
+                </p>
+            </div>
+
+            <div id='sc2'>
+
+                <!-- Track 1: A-Teens - Upside Down -->
+                <a href='#track-modal-1' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-spring-LSY.jpg' />
+                        <h1>Upside Down</h1>
+                        <h2>A-Teens</h2>
+                        <p>Picked up by 이서영</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-1' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-spring-LSY.jpg'></div>
+                        <div class="modal-info">
+                            <h1>Upside Down</h1>
+                            <h2>A-Teens</h2>
+                            <p>봄입니다! 새순과 꽃, 벌과 나비의 계절입니다. 어느 시나 노래에서나 항상 밝고 희망찬 상징으로 화자되는 계절이죠.
+                                하지만 봄이 싫어지는 사람들도 있습니다. 그래요, 바로 당신! 새 학기가 시작된 당신말이에요!<br />
+                                방학이 끝난 것만으로도 서러운데, 고지식한 역사 선생님께 꾸지람까지 들은 당신을 위해 A*Teens가 부릅니다.<br />
+                                흔들어(Upside Down)!</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/ggiUMDccO0Y"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 2: CODE KUNST - Flower -->
+                <a href='#track-modal-2' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-spring-KSH.jpg' />
+                        <h1>Flower</h1>
+                        <h2>CODE KUNST</h2>
+                        <p>Picked up by 김세환</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-2' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-spring-KSH.jpg'></div>
+                        <div class="modal-info">
+                            <h1>Flower</h1>
+                            <h2>CODE KUNST</h2>
+                            <p>김세환님의 봄 추천곡</p>
+                            
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/m8Z-YANwihM"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 3: Nao - 春風 -->
+                <a href='#track-modal-3' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-spring-CYJ.jpg' />
+                        <h1>春風</h1>
+                        <h2>Nao</h2>
+                        <p>Picked up by 최예주</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-3' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-spring-CYJ.jpg'></div>
+                        <div class="modal-info">
+                            <h1>春風</h1>
+                            <h2>Nao</h2>
+                            <p> 잔잔한 봄바람이 불어옵니다. 봄바람은 본래부터 자신만의 색을 갖고 있나 봅니다.<br />
+                                머리카락이 흩날릴때마다 연한 벚꽃색이 보입니다.
+                                가녀린 봄바람은 꽃잎들에게 자신이 왔음을 힘겹게 알립니다.
+                                겨울이 끝난지 얼마 안 됐는지 봄바람은 연약하기만 합니다.
+                                그 누가 한없이 작은 봄바람을 기억하기나 할까요?<br />
+                                하지만 시간은 봄바람을 더욱 강하게 만듭니다.
+                                여름 햇살이 다가오는 것을 느낀 사람들이 옷을 얇게 입고 오는 것을 아는지,
+                                봄바람은 이 시기를 놓치지 않습니다.<br />
+                                짧은 봄, 봄바람은 사람들에게 자신이 살아있음을 온몸으로 외칩니다.
+                                짧은 시간이었지만 내가 왔었다고. 나를 기억해달라고. 나를 잊지 말아달라고.</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/pmCW6T-IN68"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Track 4: Sobrem - 2anyFirst -->
+                <a href='#track-modal-4' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-spring-GH.jpg' />
+                        <h1>2anyFirst</h1>
+                        <h2>Sobrem</h2>
+                        <p>Picked up by 구현</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-4' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-spring-GH.jpg'></div>
+                        <div class="modal-info">
+                            <h1>2anyFirst</h1>
+                            <h2>Sobrem</h2>
+                            <p>봄은 소생의 계절이라고들 하죠.<br />
+                                인생에도 봄이 있다면, 꽃들이 만발하고, 만물이 깨어나고, 때로는 황사도 닥치는, 격동의 시기일 것입니다.<br />
+                                당신의 봄은 언제였나요? 아니, 언제가 될까요?</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/pW2tNzAwzqo"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </section>
+
+        <footer>
+            <a href="https://icons8.com/icon/100324/checkout"><p>Checkout icon by Icons8</p></a>
+            <p>Copyright © O-Zo 2021</p>
+        </footer>
+
+    </div>
+</body>
+</html>

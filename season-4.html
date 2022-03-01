@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <title>Winter</title>
+    <style>
+        /* 초기화 */
+        * {
+            margin: 0; padding: 0; border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            font-family: 'Roboto', 'NanumSquareRound', sans-serif;
+        }
+        a {
+            text-decoration: none;
+            background-color: transparent;
+            color: white;
+            outline: none;
+        }
+        a:hover, a:active {
+            text-decoration: none;
+            color: white;}
+    </style>
+
+    <script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' />
+    <link rel="stylesheet" href="css/toggle_menu.css"/>
+    <script src="js/season-4-snow.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto&family=Vollkorn:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+
+    <link rel="stylesheet" href="css/season.css"/>
+    <style>
+        /* 모달 */
+        .blocker {
+            z-index: 101;
+        }
+        .modal {
+            max-width: 800px;
+        }
+        
+        /* 래퍼 */
+        #wrapper, .overlap-img {
+            background-image: url('img/bg-winter.jpg');
+            background-color: #8BBFD4;
+        }
+
+        /* 헤더 */
+        #sidebar-menu-bg {
+            background-color: #25363DC0;
+        }
+        .sidebar-menu-inner a {
+            font-family: 'Vollkorn', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #fffafaE0
+        }
+        .sidebar-menu-inner li:hover{
+            background-color: #25363D20;
+        }
+
+        /* 섹션 1 */
+        .page-title {
+            margin: -120px 0 0 -200px;
+            font-family: 'Vollkorn', serif;
+            font-size: 96px;
+            font-weight: 500;
+            color: #25363DE0;
+        }
+        .page-subtitle {
+            margin: 30px 0 0 -200px;
+            font-family: 'Vollkorn', serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: #25363DC0;
+        }
+
+        /* 섹션 2 */
+        .track-box {
+            background-color: #25363DE0;
+            color: snow;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id='wrapper'>
+        
+        <header>
+            <input type="checkbox" class="open-sidebar-menu" id="open-sidebar-menu">
+            <label for="open-sidebar-menu" class="sidebar-icon-toggle">
+                <div class="spinner diagonal part-1"></div>
+                <div class="spinner horizontal"></div>
+                <div class="spinner diagonal part-2"></div>
+            </label>
+            <div class='overlap-img'></div>
+            <div id="sidebar-menu-bg">
+                <ul class="sidebar-menu-inner">
+                    <li><a href='season-1.html'>Spring</a></li>
+                    <li><a href='season-2.html'>Summer</a></li>
+                    <li><a href='season-3.html'>Autumn</a></li>
+                    <li><a href='season-4.html'>Winter</a></li>
+                </ul>
+            </div>
+            <h1 class='logo'>
+                <a href='index.html'><img src='img/logo-alt.png' style='width:100%'/></a>
+            </h1>
+            <h1 class='cart'>
+                <a href='cart.html'><img src="img/icons8-checkout-24.png" style='width: 100%; height: 100%'/></a>
+            </h1>
+            <nav class="nav">
+                <ul>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+
+            <div id='sc1'>
+                <h1 class='page-title'>Winter</h1>
+                <p class='page-subtitle'>
+                    To appreciate the beauty of a snowflake
+                    <br />
+                    it is necessary to stand out in the cold.
+                </p>
+            </div>
+
+            <div id='sc2'>
+
+                <!-- Track 1: Sabrina Claudio - Warm December -->
+                <a href='#track-modal-1' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-winter-LSY.jpg' />
+                        <h1>Warm December</h1>
+                        <h2>Sabrina Claudio</h2>
+                        <p>Picked up by 이서영</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-1' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-winter-LSY.jpg'></div>
+                        <div class="modal-info">
+                            <h1>Warm December</h1>
+                            <h2>Sabrina Claudio</h2>
+                            <p> 당신은 크리스마스를 어떻게 보내시나요? 가족들과? 연인과? 친구들과? 아니면 혼자서 쓸쓸히?
+                                12월은 한겨울임을 자랑하듯 얼음장같이 춥기만 합니다.<br />
+                                그래도 걱정마세요. 당신의 크리스마스만큼은 무척 따뜻하고 포근할테니까요. 어째서냐고요? 그야...<br /><br />
+                                'Cause this holiday, I got you with me.<br />
+                                (이번 이 휴일에, 내게는 너가 있기 때문이야)</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="300" scrolling="no" frameborder="no" allow="autoplay"
+                                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/931926721&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 2: Zion.T - 눈 (Feat. 이문세) -->
+                <a href='#track-modal-2' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-winter-KSH.jpg' />
+                        <h1>눈 (Feat. 이문세)</h1>
+                        <h2>Zion.T</h2>
+                        <p>Picked up by 김세환</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-2' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-winter-KSH.jpg'></div>
+                        <div class="modal-info">
+                            <h1>눈 (Feat. 이문세)</h1>
+                            <h2>Zion.T</h2>
+                            <p>김세환님의 겨울 추천곡</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/uUt4lwddk8U"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 3: Acro Jazz Laboratories - Wish -->
+                <a href='#track-modal-3' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-winter-CYJ.jpg' />
+                        <h1>Wish</h1>
+                        <h2>Acro Jazz Laboratories</h2>
+                        <p>Picked up by 최예주</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-3' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-winter-CYJ.jpg'></div>
+                        <div class="modal-info">
+                            <h1>Wish</h1>
+                            <h2>Acro Jazz Laboratories</h2>
+                            <p> 흰 눈 한 송이가 하늘에게 내려옵니다. 곧이어 다른 눈송이들도 잇따라 내려옵니다. 
+                                어두운 겨울 하늘을 올려다봅니다. 사람이 삶을 다하면 밤하늘을 밝혀주는 별이 된다고들 하지요. 
+                                사실은 별이 된 사람들이 겨울이 되면, 눈송이의 모습으로 잠시 하늘에서 내려오는 것 아닐까 생각이 듭니다.<br />
+                                모두가 잠든 새벽, 눈송이들은 세상에 남겨둔 소중한 사람들의 얼굴을 봅니다. 
+                                그러고는 다시 하늘로 올라가 여름 하늘의 별이 되겠지요.<br />
+                                우리들은 흰 눈들이 소복히 쌓이는 모습을 보고 설렘에 가득 차곤 합니다. 
+                                소중한 이들이 자신을 보러 하늘에서 내려오는데 안 설렐 수가 있을까요?</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/Gz1-1N4PYSE"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 4: Chroma - The first snowfall on my secret base -->
+                <a href='#track-modal-4' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-winter-GH.jpg' />
+                        <h1>The first snowfall on my secret base</h1>
+                        <h2>Chroma</h2>
+                        <p>Picked up by 구현</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-4' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-winter-GH.jpg'></div>
+                        <div class="modal-info">
+                            <h1>The first snowfall on my secret base</h1>
+                            <h2>Chroma</h2>
+                            <p> 첫눈을 맞는 날이면, 눈밭에서 뒹굴던 그 시절로 돌아가고 싶어집니다.<br />
+                                더 이상 비밀 기지에 언제까지고 숨어있을 수 없는 나이가 되어버렸지만,<br />
+                                아무리 바빠도 가끔씩은 들러봅시다. 분명 그곳이 당신이 찾던 진정한 안식처일 거예요.</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/6TETq5jGBPI"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            <a href="https://icons8.com/icon/100324/checkout"><p>Checkout icon by Icons8</p></a>
+            <p>Copyright © O-Zo 2021</p>
+        </footer>
+
+    </div>
+</body>
+</html>

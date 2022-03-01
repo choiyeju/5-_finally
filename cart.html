@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<meta charset="UTF-8"/>
+<html>
+    <head>
+        <title>Cart</title>
+        <style>
+            /*초기화*/
+            * {
+                margin:  0; padding: 0;
+            }
+            a {
+                text-decoration: none;
+            }
+            li {
+                list-style: none;
+            }
+        </style>
+        
+        <script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js'></script>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' />
+        <link rel="stylesheet" href="css/toggle_menu.css"/>
+
+        <style>
+            /*페이지 구성*/
+            body{
+                background-color: transparent;
+            }
+            #page-wrapper{
+                position: relative;
+                width: 100%;
+                min-height: 100vh;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+            }
+            /*헤더*/
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            header {
+                background: #FFFFFFE0;
+                position: fixed;
+                left: 0; top: 0; right: 0;
+                height: 60px;
+                z-index: 100;
+            }
+
+            .logo {
+                position: absolute;
+                width: 240px; height: 40px;
+                margin: 15px 0 0 -120px;
+                left: 50%;
+            }
+            .cart {
+                position: absolute;
+                width: 24px; height: 24px;
+                margin: 18px;
+                right: 0;
+            }
+            .overlap-img {
+                position: absolute;
+                width: 100%;
+                min-height: 100vh;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+                opacity: 0;
+                pointer-events: none;
+            }
+            #sidebar-menu-bg {
+                background-color: #2a2a26b4;
+            }
+            .sidebar-menu-inner > li > a {
+                background-color: transparent;
+                color: snow;
+                outline: none;
+            }
+
+            /*본문 테이블*/
+            #main-wrapper {
+                width: min(90%, 1080px);
+                margin: 60px auto 0;
+                overflow: hidden;
+            }
+
+            section {
+                float: left;
+                width: 70%;
+            }
+            .tableList{
+                padding: 0 auto;
+                margin: 10px;
+                float: left;
+                text-align: center;
+                background-color: white;
+                border: 0px;
+                border-collapse: collapse;
+                position: relative;
+            }
+            .topRow{
+                font-size: 12pt;
+                background-color:#cec058;
+                color: white;
+                padding: 5px;
+                border-style: none;
+                height: 40px;
+            }
+            .btmRow{
+                font-size: 13pt;    
+                color: black;
+                padding: 5px;
+                border-style: none;
+                height: 45px;
+                border-bottom: 1px solid #ece074;
+            }
+            .btmRow:hover{
+                background-color: whitesmoke;
+            }
+
+            /*우측 결제 창*/
+            aside{
+                padding: 15px;
+                margin: 10px;
+                float: left;
+                background-color: white;
+                width: 22%;
+                border-color: #cec058;
+                border-style: solid;
+                border-radius: 20px;
+            }
+            .purchaseList{
+                padding: 3px 1px 3px 1px;
+            }
+            .btnPurchase{
+                background-color: #ece074;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                width: 100%;
+                border-radius: 20px;
+            }
+            .blocker {
+                z-index: 101;
+            }
+            .modal {
+                max-width: 800px;
+            }
+
+            /* 푸터 */
+            footer {
+                margin-top: 40px;
+                height: 48px;
+            }
+            footer p {
+                display: block;
+                width: auto; height: 32px;
+                text-align: center;
+                font-size: 16px;
+                color: black;
+                opacity: 0.5
+            }
+
+            /*모바일*/
+            @media screen and (max-width: 767px) {
+                section{
+                    width: 100%;
+                }
+                .left{
+                    float: left;
+                    width: 69%;
+                }
+                .right{
+                    float: right;
+                    width: 29%;
+                }
+                aside{
+                    padding: 10px;
+                    margin: 30px 10px 0;
+                    float: left;
+                    background-color: white;
+                    width: 90%;
+                    border-color: #cec058;
+                    border-style: solid;
+                    border-radius: 20px;
+                    position: relative;
+                }
+                .btnPurchase{
+                    background-color: #ece074;
+                    border: none;
+                    color: white;
+                    margin: 4px 2px;
+                    padding: 10px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    cursor: pointer;
+                    width: 100%;
+                    height: 80px;
+                    border-radius: 20px;
+                }
+            }
+            
+        </style>
+
+        <script>
+            // 선택된 체크박스 개수 및 총 금액 출력
+            function getCheckedCnt()  {
+                // 선택된 목록 가져오기
+                const query='input[name="checkSong[]"]:checked';
+                const selectedElements=document.querySelectorAll(query);
+                // 선택된 목록의 갯수 세기
+                const selectedElementsCnt=selectedElements.length;
+                // 출력
+                document.getElementById('selectedSongs').innerText=selectedElementsCnt;
+                // 총 금액 계산
+                const selectedPriceCnt=selectedElementsCnt
+                // 출력
+                document.getElementById('selectedPrice').innerText=selectedPriceCnt;
+            }
+
+            // 전체 체크박스 선택
+            function selectAll(selectAll)  {
+                const checkboxes 
+                   =document.getElementsByName('checkSong[]');
+                
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked=selectAll.checked;
+                })
+            }
+
+            // 체크박스 사라질 시 전체 체크 해제
+            function checkSelectAll()  {
+                // 전체 체크박스
+                const checkboxes 
+                   =document.querySelectorAll('input[name="checkSong[]"]');
+                // 선택된 체크박스
+                const checked 
+                   =document.querySelectorAll('input[name="checkSong[]"]:checked');
+                // select all 체크박스
+                const selectAll 
+                   =document.querySelector('input[name="checkSongs[]"]');
+                
+                if(checkboxes.length == checked.length)  {
+                    selectAll.checked=true;
+                }else {
+                    selectAll.checked=false;
+                }
+            }
+            // 결제되었습니다.
+            function showAlert()  {
+                alert('결제가 완료되었습니다.');
+            }
+        </script>
+    </head>
+    <body>
+        <!--전체 태그-->
+        <div id="page-wrapper">
+            <!--헤더-->
+            <header>
+                <input type="checkbox" class="open-sidebar-menu" id="open-sidebar-menu">
+                <label for="open-sidebar-menu" class="sidebar-icon-toggle">
+                    <div class="spinner diagonal part-1"></div>
+                    <div class="spinner horizontal"></div>
+                    <div class="spinner diagonal part-2"></div>
+                </label>
+                <div class='overlap-img'></div>
+                <div id="sidebar-menu-bg">
+                    <ul class="sidebar-menu-inner" >
+                        <li><a href='season-1.html'>Spring</a></li>
+                        <li><a href='season-2.html'>Summer</a></li>
+                        <li><a href='season-3.html'>Autumn</a></li>
+                        <li><a href='season-4.html'>Winter</a></li>
+                    </ul>
+                </div>
+                <h1 class='logo'>
+                    <a href='index.html'><img src='img/logo-alt.png' style='width:100%'></a>
+                </h1>
+                <nav class="nav">
+                    <ul>
+                    </ul>
+                </nav>
+            </header>
+           
+            <!--본문 테이블-->
+            <div id="main-wrapper">
+                <section>
+                    <form name="frmJoin" onsubmit="return CheckForm(this)">
+                        <table class="tableList">
+                            <colgroup>
+                                <col style="width: 5%; background-color: white;">
+                                <col style="width: 50%; background-color: white;">
+                                <col style="width: 35%; background-color: white">
+                                <col style="width: 10%; background-color: white">
+                            </colgroup>
+                            <tr class="topRow">
+                                <td><input type="checkbox" name="checkSongs" value="checkSongs" onclick='selectAll(this); getCheckedCnt()'></td>
+                                <td>title</td>
+                                <td>artist</td>
+                                <td>price</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <th>Spring</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Spring_1" name="checkSong[]" value="1" onclick='getCheckedCnt()'></td>
+                                <td>Upside Down</td>
+                                <td>A-Teens</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Spring_2" name="checkSong[]" value="2" onclick='getCheckedCnt()'></td>
+                                <td>Flower</td>
+                                <td>CODE KUNST</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Spring_3" name="checkSong[]" value="3" onclick='getCheckedCnt()'></td>
+                                <td>春風</td>
+                                <td>Nao</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Spring_4" name="checkSong[]" value="4" onclick='getCheckedCnt()'></td>
+                                <td>2anyFirst</td>
+                                <td>Sobrem</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <th>Summer</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Summer_1" name="checkSong[]" value="5" onclick='getCheckedCnt()'></td>
+                                <td>nuits d’été</td>
+                                <td>Oscar Anton & Clementine</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Summer_2" name="checkSong[]" value="6" onclick='getCheckedCnt()'></td>
+                                <td>Universe</td>
+                                <td>official髭男dism</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Summer_3" name="checkSong[]" value="7" onclick='getCheckedCnt()'></td>
+                                <td>Weigh the Anchor</td>
+                                <td>Harito</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Summer_4" name="checkSong[]" value="8" onclick='getCheckedCnt()'></td>
+                                <td>You Are My World</td>
+                                <td>nanobii</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <th>Autumn</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Autumn_1" name="checkSong[]" value="9" onclick='getCheckedCnt()'></td>
+                                <td>Va Va Vis</td>
+                                <td>Florina</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Autumn_2" name="checkSong[]" value="10" onclick='getCheckedCnt()'></td>
+                                <td>Autumn Breeze</td>
+                                <td>JIDA</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Autumn_3" name="checkSong[]" value="11" onclick='getCheckedCnt()'></td>
+                                <td>달에서의 하루</td>
+                                <td>장세용</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Autumn_4" name="checkSong[]" value="12" onclick='getCheckedCnt()'></td>
+                                <td>Railroad</td>
+                                <td>Aire</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <th>Winter</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Winter_1" name="checkSong[]" value="13" onclick='getCheckedCnt()'></td>
+                                <td>Warm December</td>
+                                <td>Sabrina Claudio</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Winter_2" name="checkSong[]" value="14" onclick='getCheckedCnt()'></td>
+                                <td>눈 (Feat. 이문세)</td>
+                                <td>Zion.T</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Winter_3" name="checkSong[]" value="15" onclick='getCheckedCnt()'></td>
+                                <td>Wish</td>
+                                <td>Acro Jazz Laboratories</td>
+                                <td>1 $</td>
+                            </tr>
+                            <tr class="btmRow">
+                                <td><input type="checkbox" id="Winter_4" name="checkSong[]" value="16" onclick='getCheckedCnt()'></td>
+                                <td>The first snowfall on my secret base</td>
+                                <td>Chroma</td>
+                                <td>1 $</td>
+                            </tr>
+                        </table> 
+                    </form>
+                </section>
+                <!--우측 결제 창-->
+                <aside>
+                    <div class="left">
+                        <ul>
+                            <li  class="purchaseList">select : <span id="selectedSongs">0</span></li>
+                            <hr style="border: solid 1px #ece074;">
+                            <li  class="purchaseList">total price : <span id="selectedPrice">0</span> $</li>
+                            <hr style="border: solid 1px #ece074;">
+                            <li  class="purchaseList">
+                                <input type="checkbox" id="detail" class="purchaseList" value="checkbox">
+                                <label for="detail"  class="purchaseList">
+                                    <span>Project:Seasons <a href="#modal-showTerms" rel="modal:open">이용약관</a>에 동의합니다.</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <button class="btnPurchase" onclick="showAlert()">Purchase</button>
+                    </div>
+                </aside>
+                <div id="modal-showTerms" class="modal">
+                    <div class="modal_content">
+                        <br><p>제 1 조 (목적) </p>
+                        <p>이 약관은 O-Zo 주식회사(이하 “회사”)가 제공하는 Project:Seasons 서비스(이하 "서비스")의 이용과 관련하여 “회사”와 “회원”의 권리와 의무 및 책임사항, 기타 필요한 사항을 규정하는 것을 목적으로 합니다. </p>
+                        <br><p>제 2 조 (정의) </p>
+                        <p>1. 이 약관에서 사용되는 용어의 정의는 다음과 같습니다. </p>
+                        <p> “이용자”라 함은 “서비스”를 이용하는 “회원”을 의미합니다. </p>
+                        <p>2. 본 약관에서 사용하는 용어의 정의는 본 조에서 정하는 것을 제외하고는 관련 법령, O-Zo 이용약관, O-Zo 유료서비스 이용약관 및 제4조에 따른 별도의 운영정책에서 정하는 바에 따르며, 그 외에는 일반 상관례에 따릅니다. 하지만 생긴 것만 유료지 사실은 무료 서비스니까 이 조항은 유효하지 않습니다. </p>
+                        <br><p>제 3 조 (약관의 게시와 개정) </p>
+                        <p>1. “회사”는 이 약관의 내용, 상호, 대표자(조장) 성명(안쓸거에용), 전화번호(없음), 팩스번호(없음), 사업자등록번호(없음), 통신판매업 신고번호(없음), 고객센터(없음) 등을 “이용자”가 쉽게 알 수 있도록 “서비스” 초기 화면에 게시합니다. 다만, 약관은 “이용자”가 연결화면을 통하여 볼 수 있도록 할 수 있습니다. </p>
+                        <p>2. “회사”는 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제에 관한 법률, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 관련 법을 위반하지 않는 범위에서 이 약관을 개정할 거지만 애초에 유료 서비스 아니니까 걱정마세요. </p>
+                        <p>3. “회사”가 약관을 개정할 경우 적용일자 및 개정사유를 제1항의 방식에 따라 개정약관의 적용일자 10일 전에 공지할지도 모릅니다. 다만, “이용자”에게 불리하게 약관내용을 변경하는 경우에는 공지 외에 별도의 전자적 수단(서비스 내 알림 등)을 통해 명확히 통지합니다. </p>
+                        <p>4. “회사”가 전항에 따라 개정약관을 공지 또는 통지하면서 “이용자”에게 일정 기간 내에 의사표시를 하지 않으면 동의한 것으로 본다는 뜻을 명확하게 공지 또는 통지하였음에도 “이용자”가 명시적으로 거부의 의사표시를 하지 않은 경우 “이용자”가 개정약관에 동의한 것으로 봅니다. </p>
+                        <p>5. “이용자”가 개정약관의 적용에 동의하지 않을 경우 “회사”는 개정약관의 내용을 적용할 수 없으며, 이 경우 “이용자”는 이용계약을 해지할 수 있습니다. 다만, 기존 약관을 적용할 수 없는 특별한 사정이 있는 경우 “회사”는 이용계약을 해지할 수 있습니다. </p>
+                        <br><p>제 4 조 (약관 외 준칙) </p>
+                        <p>1. “회사”는 “서비스” 유지 및 “이용자” 보호 등을 위해 별도의 운영정책을 둘 수 있으며, “이용자”는 “회사”가 정한 운영정책을 반드시 확인하고 준수하여야 합니다. </p>
+                        <p>2. 이 약관에 정하지 않은 사항이나 해석에 대하여는 O-Zo 이용약관, O-Zo 유료서비스 이용약관, 운영정책 등 제규정 및 관련 법령에 따릅니다. </p>
+                        <br><p>제 5 조 (이용계약의 성립) </p>
+                        <p>1. “서비스”에 대한 이용계약은 “회원”이 이 약관에 동의한 후 이용신청을 하고 “회사”가 이를 승낙하면 성립합니다. </p>
+                        <p>2. 존재하지 않는 “유료 서비스”를 이용하기 위한 “유료 이용계약”은 “회원”이 존재하지 않는 이용권을 구입하기 위하여 존재하지 않는 “유료 서비스” 이용신청을 하고 “회사”가 이를 승낙하면 성립합니다. </p>
+                        <p>3. 만 19세 미만의 미성년자인 “이용자”가 “유료 이용계약”을 체결하기 위하여는 부모 등 법정대리인의 동의를 얻어야 합니다. “회사”는 만 19세 미만의 미성년자인 “이용자”가 부모 등 법정대리인의 동의를 얻지 않으면 미성년자인 “이용자” 본인 또는 법정대리인이 그 “유료 이용계약”을 취소할 수 있다는 내용을 계약 체결 전에 고지합니다. 만약 만 19세 미만의 미성년자인 “이용자”가 성년자인 제3자의 고유정보를 이용하여 “유료 이용계약”을 체결하였거나 법정대리인의 동의절차를 진행한 경우 또는 성년자인 제3자의 결제정보를 동의 없이 이용하여 결제를 하는 등 속임수를 사용하여 “회사”로 하여금 “이용자”가 성년자이거나 법정대리인의 동의가 있었던 것으로 믿게 한 경우에는 법정대리인의 동의가 없더라도 “이용자” 또는 법정대리인이 일방적으로 취소할 수 없습니다. </p>
+                        <p>4. “회사”는 본 조의 이용 신청에 대하여 승낙함을 원칙으로 합니다. 다만, “회사”는 다음 각 호에 해당하는 경우 승낙을 하지 않거나 승낙을 유보할 수 있습니다. </p>
+                        <p>가입신청자가 회사가 제공하는 O-Zo 서비스(이하 “O-Zo”) 회원이 아닌 경우</p>
+                        <p>실명 인증된 O-Zo 아이디 3개를 초과하여 가입하는 경우</p>
+                        <p>가입신청자가 이 약관의 위반 등의 사유로 이전에 회원자격이 상실 또는 이용계약이 해지되었던 경우</p>
+                        <p>실명이 아니거나 타인의 명의를 이용한 경우</p>
+                        <p>허위의 정보를 기재하거나, 회사가 제시하는 내용을 기재하지 않은 경우 또는 오기 등이 있는 경우</p>
+                        <p>만 14세 미만 미성년자가 법정대리인 동의 없이 신청하거나, 사업자 또는 법인 명의로 신청하는 경우</p>
+                        <p>일정 이상의 추천이나 학점을 부여하지 않은 경우</p>
+                        <p>이용정지를 당한 회원이 그 이용정지 기간 중에 이용계약을 임의 해지하고 재 신청을 하는 경우</p>
+                        <p>가입신청자의 귀책사유로 인하여 승낙이 불가능하거나 기타 회사가 정한 제반 사항을 위반하여 신청하는 경우</p>
+                        <p>기타 이 약관에 위배되거나 위법 또는 부당한 가입신청임이 확인된 경우</p>
+                        <br><p>제 6 조 (서비스의 제공 등) </p>
+                        <p>1. “서비스”의 세부 내용은 각각의 서비스 페이지를 통해 상세히 설명합니다. </p>
+                        <p>2. “유료 서비스”와 관련하여 이 약관에서 정하지 아니한 사항에 관하여는 각 이용권 구입 페이지, 도움말, FAQ 등을 통해 상세히 설명합니다. </p>
+                        <p>3. “이용자”는 “유료 서비스” 이용계약을 체결하기 전에 이 약관 및 각 이용권 구입 페이지, 도움말, FAQ 등을 통해 “회사”가 안내하는 사항을 숙지하여 착오 없이 거래할 수 있도록 하여야 합니다. </p>
+                        <p>4. “회원”이 휴대폰, 무선 모뎀이 내장/장착된 PC 등에서 무선네트워크를 통하여 “서비스”에 접속하거나 무선네트워크가 연결된 상태의 기기 내에 탑재된 “서비스” 어플리케이션을 통하여 “서비스”를 이용하는 경우, “회원”과 “회원”이 가입한 해당 통신사 간에 체결된 통신 요금제에 의한 별도의 데이터 통화료가 발생합니다. 이 경우 발생하는 데이터 통화료는 “회원”과 해당 통신사 간에 체결된 통신요금제에 따라 과금/청구/수납되므로, “회사”는 데이터 통화료에 대해 어떠한 책임도 당연히 지지 않습니다. </p>
+                        <p>5. “회사”와 “서비스” 콘텐츠에 대한 권리를 보유하고 있는 개인, 단체, 법인(이하 “권리자 등”) 간의 계약 내용, “권리자 등”의 요청에 따라 “서비스” 전부 또는 일부가 변경될 수 있습니다. </p>
+                        <p>6. “회사”는 “권리자 등”의 요청이 있는 경우, 해당 요청에 따라 “서비스”를 지원하는 기기의 종류, 이용 가능 기기 대수 등을 변경할 수 있습니다. </p>
+                        <p>7. “서비스” 중 “유료 서비스”는 “권리자 등”의 요청에 따라 대한민국 내에서만 사용이 가능하도록 제한될 수 있습니다. </p>
+                        <br><p>제 7 조 (결제방식) </p>
+                        <p> “서비스” 중 “유료 이용계약” 체결에 따른 “결제”는 ”서비스”에서 제공하는 존재하지도 않는 결제수단을 통해 이루어집니다. </p>
+                        <br><p>제 8 조 (청약철회 등) </p>
+                        <p>1. “서비스” 중 “유료 이용계약”은 청약철회가 가능한 것과 청약철회가 제한되는 것으로 구분되며, 이러한 내용은 이 약관 또는 각 이용권 구입 페이지 등에서 고지됩니다. “이용자”의 착오 구입을 방지하기 위하여 미리듣기(preview) 기능이 제공될 수 있습니다. </p>
+                        <p>2. 청약철회가 가능한 “유료 이용계약”을 체결한 “이용자”는 “유료 이용계약” 내용에 관한 서면을 교부받은 날부터 7일 이내(“유료 이용계약”에 따라 제공되는 “유료 서비스”의 내용이 표시·광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 “유료 서비스”에 대한 공급이 시작된 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내)에 청약철회 할 수 있습니다. </p>
+                        <p>3. “이용자”는 전항의 “청약철회” 기간이 경과되거나, 전자상거래 등에서의 소비자 보호에 관한 법률, 콘텐츠산업 진흥법, 온라인 디지털콘텐츠 이용자 보호지침 등 관련 법령에서 정한 청약철회 제한 사유에 해당하는 경우 “유료 이용계약”을 청약철회 할 수 없습니다. </p>
+                        <p>4. “이용자”가 “회사”의 귀책사유로 “유료 이용계약”에 따라 제공되는 “유료 서비스”를 이용할 수 없거나 그 이용에 현저히 곤란함을 겪고 있다는 점을 입증한 경우, “유료 이용계약”을 해지할 수 있습니다. 이 경우 “이용자”가 “유료 서비스”를 이용함에 따라 얻은 이익이 공제될 수 있습니다. </p>
+                        <p>5. “이용자”가 청약철회 기간 경과 후 “회사”의 책임 없는 사유를 이유로 “유료 이용계약”을 해지하는 경우, “회사”는 해지 시까지의 기 이용금액을 “회사”의 환불기준에 따라 공제하고, 공제 후 남은 금액의 10%에 해당하는 위약금을 추가 공제한 후 환불할 수 있습니다. “회사”의 환불기준은 “서비스” 도움말 또는 FAQ등에 게재됩니다. </p>
+                        <p>6. 타사의 앱마켓을 통해 결제(인앱결제 등)가 이루어진 “유료 이용계약”에 대해 청약철회, 해제, 해지하는 경우, “회사”는 해당 앱마켓에 대하여 대금지급의 정지·취소 요청 등 전자상거래 등에서의 소비자 보호에 관한 법률에 따른 관련 조치를 취합니다. 다만, 이러한 “회사”의 요청에 따른 해당 앱마켓의 환불 처리 등 조치는 해당 앱마켓 내 정책에 따라 이루어집니다. </p>
+                        <br><p>제 9 조 (회사의 의무) </p>
+                        <p> “회사”는 이 약관에서 정한 바에 따라 계속적, 안정적으로 “서비스”를 제공하기 위해 최선을 다합니다. 단, “회사”는 컴퓨터, 서버 등 정보통신설비의 보수점검, 교체 또는 고장, 통신두절 등 불가피한 사유가 있는 경우 부득이 “서비스”의 전부 또는 일부를 중단할 수 있으며, “서비스”의 운영 또는 개선을 위해 상당한 필요성이 있는 경우 “서비스”의 전부 또는 일부를 변경, 종료할 수 있습니다. 이 경우 “회사”가 사전에 예측할 수 있는 사유일 경우 상당기간 전에 이를 안내하며, 예측이 불가능한 사유일 경우 사후에 지체 없이 설명하고 안내하겠습니다. </p>
+                        <br><p>제 10 조 (이용자의 의무) </p>
+                        <p>1. “이용자”는 “서비스”를 이용한 어떠한 영리행위도 할 수 없습니다. </p>
+                        <p>2. “이용자”는 “서비스” 이용과정에서 취득한 음악콘텐츠를 사적 이용 범위 내에서 사용하여야 하고 영리를 목적으로 하는 영업장, 매장 등에서 재생 등의 방법으로 사용할 수 없습니다. 또한 음악감상서비스를 녹음하거나 “서비스” 이용과정에서 취득한 음악콘텐츠 등을 불법적으로 유포, 공유하여서는 아니 되며, 이를 위반하여 발생한 제반 문제에 대한 책임은 “이용자” 본인에게 있습니다. </p>
+                        <p>3. “서비스”에서 제공하는 콘텐츠 중 청소년 유해 매체물에 해당하는 콘텐츠는 만 19세 이상의 성년(만 19세가 되는 해의 1월 1일을 맞이한 사람을 포함함) “이용자” 중 관련 법령에 따라 나이 및 본인 여부 확인을 받은 “이용자”만 이용할 수 있습니다. </p>
+                        <p>4. “이용자”는 관련 법령에서 규정한 사항(일정 이상의 추천 또는 학점 부여)을 준수하여야 합니다. </p>
+                        <br><p>제 11 조 (책임 및 손해배상) </p>
+                        <p>1. “서비스” 제공과 관련하여 “회사”의 귀책사유로 “이용자”에게 손해가 발생한 경우 “회사”는 “이용자”에게 발생한 손해를 배상하지 않습니다. </p>
+                        <p>2. “이용자”가 이 약관의 의무를 위반하거나, “서비스” 이용과 관련하여 “회사”에 손해를 입힌 경우 “회사”에 그 손해를 배상하지 않습니다. </p>
+                        <br><p>제 12 조 (면책) </p>
+                        <p>1. “회사”는 다음 각 호의 사유로 인하여 “이용자”에게 발생한 손해에 대하여는 그 책임을 지지 아니합니다. </p>
+                        <p>천재지변 또는 이에 준하는 불가항력으로 인해 “서비스”를 제공할 수 없는 경우</p>
+                        <p> “이용자”가 자신의 아이디 또는 비밀번호 등의 관리를 소홀히 한 경우</p>
+                        <p> “회사”의 관리영역이 아닌 공중통신선로의 장애로 서비스이용이 불가능한 경우</p>
+                        <p>일정 이상의 추천 또는 학점을 부여하지 않은 경우</p>
+                        <p>통신서비스 장애 등 기타 “회사”의 귀책사유가 없는 경우</p>
+                        <p>2. “회사”는 “이용자” 상호 간 또는 “이용자”와 제3자 상호 간에 “서비스”와 관련하여 발생한 분쟁에 대하여 개입할 의무가 없으며, “회사”에 귀책사유가 없는 한 이로 인하여 발생한 손해를 배상할 책임을 부담하지 않습니다. </p>
+                        <br><p>제 13 조 (이용계약의 해지) </p>
+                        <p>1. “이용자”는 언제든지 “서비스”의 사용을 중단하고, 본 약관에 따른 이용계약을 해지할 수 있고, "회사"는 “이용자”가 관련 법령을 위반하거나 본 약관의 내용을 준수하지 않는 경우 이용계약을 해지할 수 있습니다. </p>
+                        <p>2. 전항에도 불구하고 “유료 이용계약”의 청약철회, 해지와 관련하여서는 제8조에서 정한 바에 따라 처리됩니다. </p>
+                        <p> [부칙] 이 약관은 당신이 이 약관을 인식하거나 결제하는 순간부터 적용됩니다~</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Copyright © O-Zo 2021</p>
+        </footer>
+    </body>
+</html>

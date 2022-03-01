@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <title>Summer</title>
+    <style>
+        /* 초기화 */
+        * {
+            margin: 0; padding: 0; border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            font-family: 'Roboto', 'NanumSquareRound', sans-serif;
+        }
+        a {
+            text-decoration: none;
+            background-color: transparent;
+            color: white;
+            outline: none;
+        }
+        a:hover, a:active {
+            text-decoration: none;
+            color: white;}
+    </style>
+
+    <script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' />
+    <link rel="stylesheet" href="css/toggle_menu.css"/>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+
+    <link rel="stylesheet" href="css/season.css"/>
+    <style>
+        /* 모달 */
+        .blocker {
+            z-index: 101;
+        }
+        .modal {
+            max-width: 800px;
+        }
+        
+        /* 래퍼 */
+        #wrapper, .overlap-img {
+            background-image: url('img/bg-summer.jpg');
+            background-color: #0097fc;
+        }
+
+        /* 헤더 */
+        #sidebar-menu-bg {
+            background-color: #0097fc60;
+        }
+        .sidebar-menu-inner a {
+            font-family: 'Lobster', serif;
+            letter-spacing: 1px;
+            color: #fffafaE0;
+        }
+        .sidebar-menu-inner li:hover{
+            background-color: #0097fc20;
+        }
+
+        /* 섹션 1 */
+        .page-title {
+            margin: -120px 0 0 -200px;
+            font-family: 'Lobster', serif;
+            font-size: 96px;
+            color: #0097fc;
+            text-shadow: 0px 0px 20px #EEEC;
+        }
+        .page-subtitle {
+            margin: 30px 0 0 -200px;
+            font-family: 'Lobster', serif;
+            font-size: 20px;
+            color: #0097fc;
+            text-shadow: 0px 0px 20px #EEEC;
+        }
+
+        /* 섹션 2 */
+        .track-box {
+            background-color: #0097fce0;
+            color: snow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='wrapper'>
+
+        <header>
+            <input type="checkbox" class="open-sidebar-menu" id="open-sidebar-menu">
+            <label for="open-sidebar-menu" class="sidebar-icon-toggle">
+                <div class="spinner diagonal part-1"></div>
+                <div class="spinner horizontal"></div>
+                <div class="spinner diagonal part-2"></div>
+            </label>
+            <div class='overlap-img'></div>
+            <div id="sidebar-menu-bg">
+                <ul class="sidebar-menu-inner">
+                    <li><a href='season-1.html'>Spring</a></li>
+                    <li><a href='season-2.html'>Summer</a></li>
+                    <li><a href='season-3.html'>Autumn</a></li>
+                    <li><a href='season-4.html'>Winter</a></li>
+                </ul>
+            </div>
+            <h1 class='logo'>
+                <a href='index.html'><img src='img/logo-alt.png' style='width:100%'/></a>
+            </h1>
+            <h1 class='cart'>
+                <a href='cart.html'><img src="img/icons8-checkout-24.png" style='width: 100%; height: 100%'/></a>
+            </h1>
+            <nav class="nav">
+                <ul>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+
+            <div id='sc1'>
+                <h1 class='page-title'>Summer</h1>
+                <p class='page-subtitle'>
+                    Sun is shining. Weather is sweet.
+                    <br />
+                    Make you wanna move your dancing feet.
+                </p>
+            </div>
+
+            <div id='sc2'>
+
+                <!-- Track 1: Oscar Anton & Clementine - nuits d’été -->
+                <a href='#track-modal-1' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-summer-LSY.jpg' />
+                        <h1>nuits d’été</h1>
+                        <h2>Oscar Anton & Clementine</h2>
+                        <p>Picked up by 이서영</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-1' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-summer-LSY.jpg'></div>
+                        <div class="modal-info">
+                            <h1>nuits d’été</h1>
+                            <h2>Oscar Anton & Clementine</h2>
+                            <p> 여름입니다. 햇살은 내리쬐고, 그보다 더 강렬한 열기가 우리 몸을 두들깁니다.
+                                때때로 짙은 비가 대지를 넘치곤 하지만 기필코 마르고 말겠죠.
+                                변화무쌍한 나날에 의욕이 사라지고, 모든 것에 지칠 때 이 노래를 들어보세요.<br /><br />
+                                Alors t'arrêtes pas, nan j'ai plus mal à la tête<br />
+                                그러니까 멈추지 마, 절대, 내 머리가 더 아파 와<br />
+                                Je ne vois plus que toi, tu dois trouver ça bête<br />
+                                난 너밖에 안 보여, 넌 이 바보를 찾아야 해<br />
+                                Et ne t'en fais pas, relève la tête le ciel est bleu<br />
+                                걱정은 하지 마, 고개들어 하늘을 봐, 파란색이야<br />
+                                Compte un, deux, trois et tout ira mieux<br />
+                                하나 둘 셋 세 봐, 그럼 모든 게 괜찮아질 거야</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/qC5v565tuTU"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 2: official髭男dism - Universe -->
+                <a href='#track-modal-2' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-summer-KSH.jpg' />
+                        <h1>Universe</h1>
+                        <h2>official髭男dism</h2>
+                        <p>Picked up by 김세환</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-2' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-summer-KSH.jpg'></div>
+                        <div class="modal-info">
+                            <h1>Universe</h1>
+                            <h2>official髭男dism</h2>
+                            <p>김세환님의 여름 추천곡</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/6lnS-8FVod4"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 3: Harito - Weigh the Anchor -->
+                <a href='#track-modal-3' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-summer-CYJ.jpg' />
+                        <h1>Weigh the Anchor</h1>
+                        <h2>Harito</h2>
+                        <p>Picked up by 최예주</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-3' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-summer-CYJ.jpg'></div>
+                        <div class="modal-info">
+                            <h1>Weigh the Anchor</h1>
+                            <h2>Harito</h2>
+                            <p> 바닷가 파도 소리가 들립니다. 바닷물의 색은 지금껏 한번도 본적없는 에메랄드 빛 푸른 보석같습니다. 
+                                모래 위 놓여있는 발등 위로 반짝이는 물들이 올라옵니다. 
+                                고개를 들어 앞을 보자 벌써 바다 가까이 다가간 소중한 사람이 보입니다. 
+                                푸른 빛의 바닷물들은 이미 소중한 사람의 무릎까지 차올랐습니다. 
+                                여름 바다 위 강한 햇살 탓인가 그 사람의 눈동자 색 또한 이미 에메랄드 색으로 바뀌어있습니다. 
+                                햇살이 바닷물에 일렁일때마다 그 사람의 눈동자 색엔 푸른 색이 담깁니다. 
+                                우리들은 바다와 모래의 경계선 위를 달리고 있습니다.</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="300" scrolling="no" frameborder="no" allow="autoplay"
+                                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/276176990&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Track 4: nanobii - You Are My World -->
+                <a href='#track-modal-4' rel='modal:open'>
+                    <div class='track-box'>
+                        <img src='img/cover-summer-GH.jpg' />
+                        <h1>You Are My World</h1>
+                        <h2>nanobii</h2>
+                        <p>Picked up by 구현</p>
+                        <h3>▶ More Info</h3>
+                    </div>
+                </a>
+                <div id='track-modal-4' class='modal'>
+                    <div class='modal_content'>
+                        <div class='modal-cover'><img src='img/cover-summer-GH.jpg'></div>
+                        <div class="modal-info">
+                            <h1>You Are My World</h1>
+                            <h2>nanobii</h2>
+                            <p> 잠 못 드는 한여름 밤이면, 문득 당신에게로 뛰어들고 싶어요.<br />
+                                언제나 제 다음 하루를 만들어주는 건 바로 당신입니다.</p>
+
+                            <h3>▼ Listen to Music</h3>
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/XJUKwYxAglE"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </section>
+        
+        <footer>
+            <a href="https://icons8.com/icon/100324/checkout"><p>Checkout icon by Icons8</p></a>
+            <p>Copyright © O-Zo 2021</p>
+        </footer>
+
+    </div>
+</body>
+</html>

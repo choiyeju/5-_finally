@@ -1,0 +1,178 @@
+<html>
+<head>
+    <meta property='og:title' content='Project: SEASONS'>
+    <meta property='og:description' content='Project: SEASONS by O-Zo'>
+    <meta property='og:image' content='http://seasons05.dothome.co.kr/img/logo.png'>
+    <title>Project: SEASONS</title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+        .container{
+            width: 100%; height: auto;
+            
+        }
+        #spring{
+            position: absolute;
+            right: 50%; bottom: 50%;
+            width:45%; height: 45%;
+            z-index : 0;
+            overflow:hidden;
+        }
+        #summer{
+            position: absolute;
+            left: 50%; bottom: 50%;
+            width:45%; height: 45%;
+            z-index : 0;
+            overflow:hidden;
+        }
+        #summer2{
+            position: absolute;
+            left: 50%; bottom: 50%;
+            width:45%; height: 45%;
+            z-index : 0;
+            overflow:hidden;
+        }
+        #autumn{
+            position: absolute;
+            left: 50%; top: 50%;
+            width:45%; height: 45%;
+            z-index : 0;
+            overflow:hidden;
+        }
+        #winter{
+            position: absolute;
+            right: 50%; top: 50%;
+            width:45%; height: 45%;
+            z-index : 0;
+            overflow: hidden;
+        }
+        img{
+            width: 100%; height: 100%;
+        }
+        #Logo{
+            position: absolute;
+            width:10%; height:16%;
+            left: 45%; top: 41%;
+            margin:0; padding:0;
+            z-index: 2;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script src="https://tistory3.daumcdn.net/tistory/941717/skin/images/jquery.min.js" type="text/javascript"></script> 
+    <script src="https://tistory3.daumcdn.net/tistory/941717/skin/images/snowfall.jquery.js" type="text/javascript"></script>
+    
+    <link rel="stylesheet" href="css/main-spring.css">
+    <script src="js/main-spring.js"></script>
+    <link rel="stylesheet" href="css/main-summer.css">
+    <script src="js/main-summer.js"></script>
+    <link rel="stylesheet" href="css/main-autumn.css">
+    <script src="js/main-autumn.js"></script>
+
+    <script type="text/javascript">
+    $(function(){
+        /*Spring*/
+        $("#spring").ready(function () {
+            $("#spring").sakura("#spring");
+        });
+        $('#spring').mouseenter(function(){
+            $('#spring').stop().animate({height: $(window).height()/100*45 + $(window).height()/20, width: $(window).width()/100*45 + $(window).width()/20,},200);
+            $("#spring").css("z-index", 0);
+            $("#summer").css("webkit-filter", "blur(5px)");
+            $("#autumn").css("webkit-filter", "blur(5px)");
+            $("#winter").css("webkit-filter", "blur(5px)");
+        });
+        $('#spring').mouseleave(function(){
+            $('#spring').stop().animate({height: $(window).height()/100*45, width: $(window).width()/100*45},200);
+            $("#spring").css("z-index", 0);
+            $("#summer").css("webkit-filter", "blur(0px)");
+            $("#autumn").css("webkit-filter", "blur(0px)");
+            $("#winter").css("webkit-filter", "blur(0px)");
+        });
+        /*Summer*/
+        
+        $("#summer").ready(function () {
+            $("#summer").summer("#summer");
+        });
+        
+        $('#summer').mouseenter(function(){
+            $('#summer').stop().animate({height: $(window).height()/100*45 + $(window).height()/20, width: $(window).width()/100*45 + $(window).width()/20},200);
+            $("#summer").css("z-index", 0);
+            $("#spring").css("webkit-filter", "blur(5px)");
+            $("#autumn").css("webkit-filter", "blur(5px)");
+            $("#winter").css("webkit-filter", "blur(5px)");
+        });
+        $('#summer').mouseleave(function(){
+            $('#summer').stop().animate({height: $(window).height()/100*45, width: $(window).width()/100*45},200);
+            $("#summer").css("z-index", 0);
+            $("#spring").css("webkit-filter", "blur(0px)");
+            $("#autumn").css("webkit-filter", "blur(0px)");
+            $("#winter").css("webkit-filter", "blur(0px)");
+        });
+        /*Autumn*/
+        $("#autumn").ready(function () {
+            $("#autumn").autumn("#autumn");
+        });
+        $('#autumn').mouseenter(function(){
+            $('#autumn').stop().animate({height: $(window).height()/100*45 + $(window).height()/20, width: $(window).width()/100*45 + $(window).width()/20},200);
+            $("#autumn").css("z-index", 0);
+            $("#spring").css("webkit-filter", "blur(5px)");
+            $("#summer").css("webkit-filter", "blur(5px)");
+            $("#winter").css("webkit-filter", "blur(5px)");
+            
+        });
+        $('#autumn').mouseleave(function(){
+            $('#autumn').stop().animate({height: $(window).height()/100*45, width: $(window).width()/100*45},200);
+            $("#autumn").css("z-index", 0);
+            $("#spring").css("webkit-filter", "blur(0px)");
+            $("#summer").css("webkit-filter", "blur(0px)");
+            $("#winter").css("webkit-filter", "blur(0px)");
+        });
+        /*Winter*/
+        $("#winter").ready(function(){
+            $("#winter").snowfall({deviceorientation : true, round : true, minSize: 1, maxSize:8,  flakeCount : 100
+            })
+        });
+        $('#winter').mouseenter(function(){
+            $('#winter').stop().animate({height: $(window).height()/100*45 + $(window).height()/20, width: $(window).width()/100*45 + $(window).width()/20},200);
+            $("#winter").css("z-index", 0);
+            $("#spring").css("webkit-filter", "blur(5px)");
+            $("#autumn").css("webkit-filter", "blur(5px)");
+            $("#summer").css("webkit-filter", "blur(5px)");
+        });
+        $('#winter').mouseleave(function(){
+            $('#winter').stop().animate({height: $(window).height()/100*45, width: $(window).width()/100*45},200);
+            $("#winter").css("z-index", 0);
+            $("#spring").css("webkit-filter", "blur(0px)");
+            $("#autumn").css("webkit-filter", "blur(0px)");
+            $("#summer").css("webkit-filter", "blur(0px)");
+        });
+        /*Logo*/
+        $('#Logo').mouseenter(function(){
+            $('#Logo').stop().animate({height: ($(window).height()/100)*16*1.2, width: ($(window).width()/100)*10*1.2, left: $(window).width()/100*44, top: $(window).height()/100*39.2},200);
+            $("#spring").css("webkit-filter", "blur(5px)");
+            $("#summer").css("webkit-filter", "blur(5px)");
+            $("#autumn").css("webkit-filter", "blur(5px)");
+            $("#winter").css("webkit-filter", "blur(5px)");
+        });
+        $('#Logo').mouseleave(function(){
+            $('#Logo').stop().animate({height: ($(window).height()/100)*16, width: ($(window).width()/100)*10, left: $(window).width()/100*45, top: $(window).height()/100*41},200);
+            $("#spring").css("webkit-filter", "blur(0px)");
+            $("#summer").css("webkit-filter", "blur(0px)");
+            $("#autumn").css("webkit-filter", "blur(0px)");
+            $("#winter").css("webkit-filter", "blur(0px)");
+        });
+    });
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="spring"><a href="season-1.html"><img src="img/main-spring.png"></a></div>
+        <div id="summer"><a href="season-2.html"><img src="img/main-summer.png"></a></div>
+        <div id="autumn"><a href="season-3.html"><img src="img/main-autumn.png"></a></div>
+        <div id="winter"><a href="season-4.html"><img src="img/main-winter.png"></a></div>
+    </div>
+    <a href="cart.html"><img id="Logo" src="img/logo.png"></a>
+</body>
+</html>
